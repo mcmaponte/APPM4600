@@ -1,3 +1,6 @@
+# This is a comment from Lab2, practicing using git 
+# This is also a comment from Lab2, now I need to switch back to APPM4600
+
 import numpy as np
 import matplotlib.pyplot as plt
 
