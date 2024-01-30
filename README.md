@@ -12,4 +12,4 @@ This repository contains my collective work for APPM 4600 - Spring 2024
 Lab work and homework are organized in their own respective folders, with each specific assignment also contained in its own folder.
 
 1/29/2024 - Repository created - Lab 1 and homework 1 committed
-1/30/2024 - Lab 2 committed
+1/30/2024 - Lab 2 committed, practicing with the different features
