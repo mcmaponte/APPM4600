@@ -1,0 +1,21 @@
+My code reads
+
+the approximate fixed point is: 1.49870112602244
+f1(xstar): 1.4987011332478908
+Error message reads: Tolerance achieved
+the approximate fixed point is: 4.683823131060242
+f2(xstar): 1.0008159522600826
+Error message reads: Maximum number of iterations reached
+
+Process finished with exit code 0
+
+Example Produces:
+
+the approximate fixed point is: 1.49870112602244
+f1(xstar): 1.4987011332478908
+Error message reads: 0
+the approximate fixed point is: 4.683823131060242
+f2(xstar): 1.0008159522600826
+Error message reads: 1
+
+Process finished with exit code 0
