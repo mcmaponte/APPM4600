@@ -55,7 +55,7 @@ def fixedPoint(f, x0, tol, Nmax):
     return [x_final, x_N, 'Maximum number of iterations reached']
 
 
-driver()
+
 
 # Exercises
 # 2.2.1 figure out a method to find degree of convergence from a vector of iterations
@@ -67,7 +67,7 @@ def findConvergance(p):
     i = 0
     limit = np.zeros((100,1))
     while not found:
-        limit[i] = np.mean(np.divide(abs(p[1:end - 1] - r), (abs(x_N[0:end - 2] - r))**alpha))
+        limit[i] = np.mean(np.divide(abs(p[1:end - 1] - r), (abs(p[0:end - 2] - r))**alpha))
         if limit[i] < 1:
             alpha += 1
             i += 1
@@ -78,19 +78,21 @@ def findConvergance(p):
 # 2.2.2 The fixed point of g(x) = (10/x+4)^0.5 is p = 1.3652300134140976
 # a) from x0 = 1.5 find iterations required to converge to 10^-10
 
-def f(x): return (10/(x+4))**0.5
-x0 = 1.5
-tol = 10**-10
-Nmax = 15
-[x_final, x_N, message] = fixedPoint(f, x0, tol, Nmax)
-print('2.2.2 a) The number of iterations required is: ', len(x_N))
+if __name__ == '__main__':
+    driver()
+    def f(x): return (10/(x+4))**0.5
+    x0 = 1.5
+    tol = 10**-10
+    Nmax = 15
+    [x_final, x_N, message] = fixedPoint(f, x0, tol, Nmax)
+    print('2.2.2 a) The number of iterations required is: ', len(x_N))
 
-# b) Use the method from 1 to estimate the order of convergence of a)
+    # b) Use the method from 1 to estimate the order of convergence of a)
 
-[alpha, k] = findConvergance(x_N)
-print('2.2.2 b)')
-print('This is the degree of convergence: ', alpha)
-print('This is the constant of convergence: ', k)
+    [alpha, k] = findConvergance(x_N)
+    print('2.2.2 b)')
+    print('This is the degree of convergence: ', alpha)
+    print('This is the constant of convergence: ', k)
 
 
 
