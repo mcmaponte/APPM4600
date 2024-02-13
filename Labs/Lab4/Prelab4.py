@@ -60,20 +60,32 @@ def fixedPoint(f, x0, tol, Nmax):
 # Exercises
 # 2.2.1 figure out a method to find degree of convergence from a vector of iterations
 def findConvergance(p):
-    end = len(p)-1
-    r = p[end]
     found = False
     alpha = 1.
     i = 0
     limit = np.zeros((100,1))
-    while not found:
-        limit[i] = np.mean(np.divide(abs(p[1:end - 1] - r), (abs(p[0:end - 2] - r))**alpha))
-        if limit[i] < 1:
-            alpha += 1
-            i += 1
-        else:
-            found = True
-            return[alpha-1, limit[i-1]]
+
+    if len(p) <= 3:
+        while not found:
+            limit[i] = abs(p[1] - p[2])/(abs(p[0]-p[2])**alpha)
+            if limit[i] < 1:
+                alpha += 1
+                i += 1
+            else:
+                found = True
+                return[alpha-1, limit[i-1]]
+    else:
+        end = len(p)-1
+        r = p[end]
+
+        while not found:
+            limit[i] = np.mean(np.divide(abs(p[1:end - 1] - r), (abs(p[0:end - 2] - r))**alpha))
+            if limit[i] < 1:
+                alpha += 1
+                i += 1
+            else:
+                found = True
+                return[alpha-1, limit[i-1]]
 
 # 2.2.2 The fixed point of g(x) = (10/x+4)^0.5 is p = 1.3652300134140976
 # a) from x0 = 1.5 find iterations required to converge to 10^-10
