@@ -191,6 +191,6 @@ def HybridSlackerDriver():
 
 
 if __name__ == '__main__':
-    #slackerdriver()
+    slackerdriver()
     HybridSlackerDriver()
 
