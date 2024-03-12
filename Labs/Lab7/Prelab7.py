@@ -31,7 +31,7 @@ def evaluatePolynomial(cn,zn):
     sum  = np.zeros((1, j))
 
     for i in range(n):
-        sum = sum + cn[i]*zn
+        sum = sum + cn[i]*zn**i
     return sum
 
 if __name__ == "__main__":
