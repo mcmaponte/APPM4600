@@ -5,10 +5,11 @@
 from adaptive_quad import *
 # get plot routines
 import matplotlib.pyplot as plt
+from time import process_time
 
 # specify the quadrature method
 # (eval_gauss_quad, eval_composite_trap, eval_composite_simpsons)
-method = eval_gauss_quad
+method = eval_composite_trap
 
 # interval of integration [a,b]
 a = 0; b = 1.
@@ -35,28 +36,40 @@ err_old = np.zeros((nM,))
 err_new = np.zeros((nM,))
 
 
+# loop 1000 times and time to understand compute performance
+times = 200
+
 # loop over quadrature orders
 # compute integral with non adaptive and adaptive
 # compute errors for both
-for iM in range(nM):
-  M = Ms[iM];
-  # non adaptive routine
-  # Note: the _,_ are dummy vars/Python convention
-  # to store uneeded returns from the routine
-  I_old,_,_ = method(M,a,b,f)
-  # adaptive routine
-  I_new,X,nsplit = adaptive_quad(a,b,f,tol,M,method)
-  err_old[iM] = np.abs(I_old-I_true)/I_true
-  err_new[iM] = np.abs(I_new-I_true)/I_true
-  # clean the error for nice plots
-  if err_old[iM] < eps:
-    err_old[iM] = eps
-  if err_new[iM] < eps:
-    err_new[iM] = eps
-  # save grids for M = 2
-  if M == Ms[0]:
-    mesh = X
 
+t1_start = process_time()
+
+for time in range(times):
+  #print(time)
+  for iM in range(nM):
+    M = Ms[iM];
+    # non adaptive routine
+    # Note: the _,_ are dummy vars/Python convention
+    # to store uneeded returns from the routine
+    I_old,_,_ = method(M,a,b,f)
+    # adaptive routine
+    I_new,X,nsplit = adaptive_quad(a,b,f,tol,M,method)
+    err_old[iM] = np.abs(I_old-I_true)/I_true
+    err_new[iM] = np.abs(I_new-I_true)/I_true
+    # clean the error for nice plots
+    if err_old[iM] < eps:
+      err_old[iM] = eps
+    if err_new[iM] < eps:
+      err_new[iM] = eps
+    # save grids for M = 2
+    if M == Ms[0]:
+      mesh = X
+
+t1_end = process_time()
+t_elapsed = t1_end - t1_start
+print('Time for method: ', method)
+print('t1_end: ', t_elapsed)
 # plot the old and new error for each f and M
 fig,ax = plt.subplots(1,2)
 ax[0].semilogy(Ms,err_old,'ro--')
